@@ -1,0 +1,33 @@
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.*
+credentials.*
+
+# Generated reports, logs, and local data
+report.json
+*.log
+coverage/
+dist/
+build/
+tmp/
+temp/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependency folders
+node_modules/
