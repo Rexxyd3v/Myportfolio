@@ -1,0 +1,390 @@
+/* =========================================
+   HOME SECTION — HERO
+   Two-row grid: copy on top, graphics below.
+   Separate tracks = graphics can never
+   overlap or stack on top of the text.
+========================================= */
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 64px);
+    display: grid;
+    overflow: hidden;
+    padding: clamp(28px, 5vh, 54px) clamp(20px, 4.8vw, 62px) 0;
+    z-index: 10;
+}
+
+.hero-inner {
+    width: 100%;
+    max-width: 1320px;
+    min-height: 0;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    row-gap: clamp(18px, 4vh, 42px);
+}
+
+/* Strict hide: prevent ANY hero child from bleeding */
+.hero.is-hidden,
+.hero.is-hidden * {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* ---- Hero Text Block ---- */
+
+.hero-text {
+    max-width: 620px;
+}
+
+.hero-text h1 {
+    font-size: clamp(42px, 5.2vw, 64px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 14px;
+    color: var(--text-white);
+}
+
+.hero-text h2 {
+    font-family: var(--font-mono);
+    font-size: clamp(15px, 1.9vw, 21px);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--primary);
+    margin-bottom: 14px;
+}
+
+.hero-text p {
+    font-size: clamp(14px, 1.2vw, 17px);
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 26px;
+}
+
+/* ---- Hero Action Buttons ---- */
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 28px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+
+.hero-btn-primary {
+    background: var(--primary);
+    color: var(--bg-darker);
+}
+
+.hero-btn-primary:hover {
+    background: #ffffff;
+    color: var(--bg-darker);
+    box-shadow: 0 0 20px rgba(255, 208, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.hero-btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-white);
+    border: 1px solid var(--border-glass);
+}
+
+.hero-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   GRAPHICS STAGE — cars left, LEDs right
+========================================= */
+
+.hero-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: clamp(18px, 5vw, 90px);
+    align-items: end;
+    min-height: 0;
+    padding-bottom: 0;
+}
+
+
+/* =========================================
+   ROBOT CAR — single lead car with
+   state-based animation classes
+
+   States (JS classes):
+   .car-driving  → wheels spin
+   .car-idle     → gentle bob, wheels stopped
+   .car-exiting  → driving + subtle body tilt
+========================================= */
+
+.car-lane {
+    position: relative;
+    min-width: 0;
+    align-self: end;
+    padding-bottom: clamp(24px, 3.2vw, 42px);
+    overflow: visible;
+}
+
+.car-convoy {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(10px, 2.6vw, 44px);
+    list-style: none;
+}
+
+.robot-car {
+    position: relative;
+    flex: 0 0 auto;
+    width: clamp(320px, min(52vw, 66vh), 680px);
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* Only the lead car is visible */
+.robot-car--mid,
+.robot-car--tail {
+    display: none;
+}
+
+/* Ground shadow — scoped inside each car */
+.robot-car::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    left: -6%;
+    right: -6%;
+    bottom: -15%;
+    height: 17%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, transparent 72%);
+    transition: opacity 0.4s ease;
+}
+
+.robot-body {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.6));
+}
+
+/* ---- Wheels ---- */
+
+.robot-wheel {
+    position: absolute;
+    z-index: 3;
+    width: 28%;
+    height: auto;
+    bottom: -8%;
+    animation: none;
+    transition: none;
+}
+
+.robot-wheel-rear  { left: 8%; }
+.robot-wheel-front { right: 14%; }
+
+.robot-car.car-driving .robot-wheel {
+    animation: spinWheels 0.5s linear infinite;
+}
+
+.robot-car.car-idle .robot-wheel {
+    animation: none !important;
+    transform: rotate(0deg) !important;
+}
+
+.robot-car.car-exiting .robot-wheel {
+    animation: spinWheels 0.3s linear infinite;
+}
+
+@keyframes spinWheels {
+    to { transform: rotate(360deg); }
+}
+
+/* ---- Idle Bob — gentle floating when parked ---- */
+
+.robot-car.car-idle {
+    animation: carIdleBob 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes carIdleBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-4px); }
+}
+
+.robot-car.car-exiting .robot-body {
+    transition: transform 800ms cubic-bezier(0.33, 1, 0.68, 1);
+    transform: rotate(-1.5deg) translateY(-2px);
+}
+
+/* ---- Detector Waves (WiFi-style, right-facing) ---- */
+
+.detector {
+    position: absolute;
+    z-index: 4;
+    right: -10px;
+    top: 18%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.wave {
+    display: block;
+    border-right: 2px solid var(--accent-green);
+    border-top: 2px solid var(--accent-green);
+    border-radius: 0 8px 0 0;
+    opacity: 0;
+    animation: wavePulse 1.5s infinite;
+}
+
+.wave-1 { width: 8px;  height: 5px;  animation-delay: 0s; }
+.wave-2 { width: 13px; height: 8px;  animation-delay: 0.25s; }
+.wave-3 { width: 18px; height: 11px; animation-delay: 0.5s; }
+
+.car-lane.is-moving .wave {
+    animation-duration: 0.7s;
+}
+
+@keyframes wavePulse {
+    0%   { opacity: 0; transform: scale(0.8); }
+    50%  { opacity: 0.9; }
+    100% { opacity: 0; transform: scale(1.15); }
+}
+
+
+/* =========================================
+   HERO EXIT ANIMATIONS (drive-active)
+   Text clears out while the convoy drives off
+========================================= */
+
+@keyframes heroExitText {
+    0%   { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(-80px); }
+}
+
+@keyframes heroExitButton {
+    0%   { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(30px); }
+}
+
+.hero.drive-active .hero-text h1 {
+    animation: heroExitText 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0s both;
+}
+
+.hero.drive-active .hero-text h2 {
+    animation: heroExitText 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.06s both;
+}
+
+.hero.drive-active .hero-text p {
+    animation: heroExitText 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.12s both;
+}
+
+.hero.drive-active .hero-actions {
+    animation: heroExitButton 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.15s both;
+}
+
+
+/* =========================================
+   LED GROUP — three standing LEDs
+========================================= */
+
+.led-group {
+    display: flex;
+    align-items: flex-end;
+    align-self: end;
+    gap: clamp(14px, 3vw, 44px);
+    padding-bottom: 0;
+}
+
+.led {
+    position: relative;
+    width: clamp(60px, min(9vw, 17vh), 120px);
+    display: flex;
+    justify-content: center;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.5s ease;
+}
+
+.led.drop {
+    transform: translateY(60px);
+    opacity: 0;
+}
+
+.led.hidden {
+    visibility: hidden;
+}
+
+.led-image {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    filter: brightness(0.28) saturate(1.15) contrast(1.05);
+    transition: filter 0.4s ease;
+}
+
+.glow {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 58%;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+/* LED ON states */
+.led.red.on .led-image {
+    filter: brightness(1.2) saturate(1.5);
+}
+.led.red.on .glow {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(255, 60, 60, 0.7) 0%, transparent 70%);
+    box-shadow: 0 0 18px rgba(255, 60, 60, 0.42);
+}
+
+.led.yellow.on .led-image {
+    filter: brightness(1.3) saturate(1.5);
+}
+.led.yellow.on .glow {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(255, 208, 0, 0.7) 0%, transparent 70%);
+    box-shadow: 0 0 18px rgba(255, 208, 0, 0.42);
+}
+
+.led.green.on .led-image {
+    filter: brightness(1.3) saturate(1.5);
+}
+.led.green.on .glow {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(0, 255, 188, 0.7) 0%, transparent 70%);
+    box-shadow: 0 0 18px rgba(0, 255, 188, 0.42);
+}

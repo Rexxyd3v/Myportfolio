@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rex Latayada | Portfolio</title>
+    <link rel="icon" type="image/png" href="assets/images/weblogo.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <div class="transition-curtain"></div>
+
+    <div class="portfolio">
+
+           <!-- NAVBAR -->
+
+        <header class="navbar">
+
+            <div class="brand">
+                <span class="brand-dot"></span>
+                <span class="brand-name">RJ</span>
+            </div>
+
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="navigation">
+
+                <a href="#home" class="nav-link active" data-target="home">Home</a>
+                <a href="#about" class="nav-link" data-target="about">About</a>
+                <a href="#projects" class="nav-link" data-target="projects">Projects</a>
+                <a href="#contact" class="nav-link" data-target="contact">Contact</a>
+
+            </nav>
+
+        </header>
+
+
+           <!-- SECTION MOUNTS -->
+
+        <div data-page="home"></div>
+        <div data-page="about"></div>
+        <div data-page="projects"></div>
+        <div data-page="contact"></div>
+
+    </div>
+
+
+    <script type="module" src="js/main.js"></script>
+
+</body>
+
+</html>

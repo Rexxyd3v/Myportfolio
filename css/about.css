@@ -1,0 +1,502 @@
+/* =========================================
+   ABOUT SECTION — BENTO GRID
+========================================= */
+
+.section-content {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 60px);
+    z-index: 20;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-glass) transparent;
+}
+
+.section-content.active {
+    display: block;
+    opacity: 1;
+}
+
+.section-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.section-header h2 {
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 900;
+    color: var(--text-white);
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+}
+
+.section-header p {
+    font-size: clamp(14px, 1.1vw, 16px);
+    color: var(--text-dimmer);
+}
+
+.section-card {
+    background: var(--bg-glass-card);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    padding: clamp(20px, 3vw, 32px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: var(--transition);
+}
+
+.section-card:hover {
+    border-color: var(--border-glass-hover);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+
+/* About-specific bento layout */
+
+.about-bento {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+}
+
+/* Image Card */
+.bento-image {
+    width: min(100%, 300px);
+    aspect-ratio: 1;
+    justify-self: center;
+    align-self: start;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed var(--border-glass-hover);
+}
+
+.bento-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.bento-image:hover img {
+    transform: scale(1.03);
+}
+
+.bio-card h2 {
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 14px;
+}
+
+.bio-card p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+}
+
+/* Terminal Card */
+.terminal-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.term-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.red-dot { background: #ff5f57; }
+.yellow-dot { background: #ffbd2e; }
+.green-dot { background: #28c840; }
+
+.term-title {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dimmer);
+}
+
+.terminal-body {
+    padding: 18px 20px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.json-key { color: var(--accent-green); }
+.json-val { color: var(--primary); }
+
+/* Core Skills Card */
+.core-skills-card {
+    grid-column: 1 / -1;
+    order: 3;
+    min-height: 250px;
+    padding: clamp(22px, 3vw, 32px);
+    background: linear-gradient(145deg, rgba(0, 214, 170, 0.08), var(--bg-glass-card));
+}
+
+.core-skills-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.core-skills-label,
+.core-skills-status {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.core-skills-label {
+    color: var(--primary);
+}
+
+.core-skills-status {
+    color: var(--accent-green);
+}
+
+.core-skills-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 24px;
+}
+
+.focus-areas {
+    margin-bottom: 22px;
+}
+
+.skill-section-label {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--accent-green);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tags span {
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 208, 0, 0.3);
+    border-radius: 4px;
+    background: rgba(255, 208, 0, 0.08);
+    color: var(--text-white);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.technical-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-glass);
+}
+
+.technical-profile-group p {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.technical-profile-group b {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.technical-profile-tools {
+    grid-column: 1 / -1;
+}
+
+.core-skill-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: start;
+}
+
+.core-skill-number {
+    color: var(--accent-green);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    padding-top: 2px;
+}
+
+.core-skill-item h3 {
+    margin-bottom: 4px;
+    color: var(--text-white);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.core-skill-item p {
+    color: var(--text-dimmer);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.about-skills-groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 24px;
+}
+
+.about-skills-group {
+    min-width: 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-glass-hover);
+}
+
+.about-skills-title {
+    margin-bottom: 12px;
+    color: var(--text-white);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.about-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+    gap: 8px;
+}
+
+.about-skill-card {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.04);
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.about-skill-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 208, 0, 0.55);
+    background: rgba(255, 208, 0, 0.1);
+}
+
+.about-skill-logo {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border: 1px solid rgba(0, 255, 188, 0.18);
+    border-radius: 6px;
+    background: rgba(2, 26, 20, 0.7);
+}
+
+.about-skill-logo img {
+    width: 19px;
+    height: 19px;
+    object-fit: contain;
+}
+
+.about-skill-card h4 {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--text-white);
+    font-size: 11px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.about-focus-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.about-focus-grid span {
+    min-width: 0;
+    padding: 10px 9px;
+    border: 1px solid rgba(255, 208, 0, 0.3);
+    border-radius: 6px;
+    background: rgba(255, 208, 0, 0.08);
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+/* Education Card */
+.education-card {
+    grid-column: 1 / -1;
+    order: 2;
+    padding: 0;
+    overflow-x: auto;
+    background: linear-gradient(145deg, rgba(255, 208, 0, 0.09), var(--bg-glass-card));
+}
+
+.education-table {
+    width: 100%;
+    min-width: 540px;
+    border-collapse: collapse;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.education-table .education-title {
+    padding: 13px 16px;
+    background: rgba(255, 208, 0, 0.12);
+    border-bottom: 1px solid var(--border-glass);
+    color: var(--primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.education-table th,
+.education-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid var(--border-glass);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.education-table th {
+    color: var(--text-white);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.education-table th:last-child,
+.education-table td:last-child {
+    white-space: nowrap;
+}
+
+.education-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.school-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-white);
+    font-weight: 700;
+}
+
+.school-logo {
+    display: block;
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    padding: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    object-fit: contain;
+}
+
+/* Chip Card */
+.bento-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+}
+
+.chip-graphic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.silicon-core {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--primary);
+    background: rgba(255, 208, 0, 0.08);
+    border: 2px solid rgba(255, 208, 0, 0.3);
+    border-radius: 8px;
+    padding: 12px 20px;
+    letter-spacing: 2px;
+}
+
+.chip-pins {
+    display: flex;
+    gap: 6px;
+}
+
+.pin {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-dimmer);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+.chip-details h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-white);
+    margin-bottom: 6px;
+}
+
+.chip-details p {
+    font-size: 13px;
+    color: var(--text-dimmer);
+    line-height: 1.6;
+}

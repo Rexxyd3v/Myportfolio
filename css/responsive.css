@@ -1,0 +1,212 @@
+/* =========================================
+   RESPONSIVE — shared breakpoints
+   Loaded last so it can override per-section
+   rules when needed.
+========================================= */
+
+@media (max-width: 900px) {
+    .about-skills-groups {
+        grid-template-columns: 1fr;
+    }
+
+    .about-bento {
+        grid-template-columns: 1fr;
+    }
+
+    .showcase-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .showcase-menu {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-stage {
+        column-gap: clamp(14px, 3vw, 32px);
+    }
+}
+
+@media (max-width: 700px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navigation {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        background: rgba(2, 26, 20, 0.95);
+        backdrop-filter: blur(20px);
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--border-glass);
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition);
+    }
+
+    .navigation.open {
+        transform: scaleY(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .navigation a {
+        width: 100%;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .navigation a::after {
+        display: none;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(32px, 10vw, 42px);
+        line-height: 1;
+        margin-bottom: 12px;
+    }
+
+    .hero-text h2 {
+        font-size: 14px;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+
+    .hero-text p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .hero-btn {
+        padding: 11px 20px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding-top: 28px;
+    }
+
+    .hero-inner {
+        row-gap: 14px;
+    }
+
+    .hero-stage {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .led-group {
+        flex: 0 0 auto;
+        align-self: flex-end;
+        gap: 12px;
+    }
+
+    .robot-car {
+        width: clamp(190px, 68vw, 270px);
+        opacity: 0 !important;
+        visibility: hidden;
+    }
+
+    .robot-car.car-driving,
+    .robot-car.car-idle,
+    .robot-car.car-exiting {
+        opacity: 1 !important;
+        visibility: visible;
+    }
+
+    .car-lane {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .led {
+        width: clamp(72px, 20vw, 108px);
+    }
+
+    .car-convoy {
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .skills-groups {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    :root {
+        --grid-size: 34px;
+    }
+}
+
+@media (min-width: 701px) {
+    .robot-car:not(.car-driving):not(.car-idle):not(.car-exiting):not(.is-offscreen) {
+        opacity: 1 !important;
+        visibility: visible;
+        animation: desktopCarEntrance 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+    }
+}
+
+@keyframes desktopCarEntrance {
+    from { transform: translateX(-120%); }
+    to { transform: translateX(0); }
+}
+
+@media (max-height: 680px) {
+    .hero-text h1 {
+        font-size: clamp(30px, 4.6vw, 48px);
+        margin-bottom: 8px;
+    }
+
+    .hero-text h2 {
+        margin-bottom: 8px;
+    }
+
+    .hero-text p {
+        margin-bottom: 16px;
+    }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .robot-car,
+    .robot-wheel,
+    .wave,
+    .lane-road,
+    .led,
+    .transition-curtain {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .hero.drive-active .hero-text h1,
+    .hero.drive-active .hero-text h2,
+    .hero.drive-active .hero-text p,
+    .hero.drive-active .hero-actions {
+        animation: none !important;
+        opacity: 0;
+    }
+}

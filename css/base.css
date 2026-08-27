@@ -1,0 +1,76 @@
+/* =========================================
+   BASE — DESIGN SYSTEM VARIABLES & RESET
+   Loaded once. Defines tokens used by all
+   sections. Do not put page-specific styles
+   here.
+========================================= */
+
+:root {
+    --primary: #ffd000;
+    --accent-green: #00ffbc;
+    --bg-dark: #0b2b20;
+    --bg-darker: #061c15;
+    --grid-line: rgba(55, 160, 113, 0.12);
+    --grid-size: 42px;
+    --bg-glass-card: rgba(255, 255, 255, 0.08);
+    --border-glass: rgba(255, 255, 255, 0.15);
+    --border-glass-hover: rgba(255, 255, 255, 0.35);
+    --text-white: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.8);
+    --text-dimmer: rgba(255, 255, 255, 0.55);
+    --font-headings: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+    --drive-duration: 900ms;
+    --drive-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--text-white);
+    background: var(--bg-darker);
+    font-family: var(--font-headings);
+    overflow: hidden;
+}
+
+body {
+    background: radial-gradient(circle at 50% 50%, var(--bg-dark) 0%, var(--bg-darker) 100%);
+}
+
+
+.transition-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-darker);
+    border-right: 3px solid var(--primary);
+    z-index: 9999;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.85, 0, 0.15, 1);
+    pointer-events: none;
+}
+
+.transition-curtain.wipe-in {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.transition-curtain.wipe-out {
+    transform: scaleX(0);
+    transform-origin: right;
+}
