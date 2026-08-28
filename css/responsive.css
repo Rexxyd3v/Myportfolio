@@ -32,6 +32,68 @@
 }
 
 @media (max-width: 700px) {
+    .section-content {
+        padding: 24px 14px 32px;
+    }
+
+    .section-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .about-bento,
+    .showcase-layout,
+    .contact-grid {
+        min-width: 0;
+    }
+
+    .core-skills-list {
+        grid-template-columns: 1fr;
+    }
+
+    .showcase-menu {
+        flex-wrap: nowrap;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+    }
+
+    .menu-btn {
+        flex: 0 0 auto;
+    }
+
+    .showcase-display {
+        min-width: 0;
+    }
+
+    .display-header {
+        gap: 12px;
+    }
+
+    .live-indicator,
+    .project-year {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .project-image-wrapper {
+        min-height: 0;
+        max-height: none;
+    }
+
+    #project-details h3,
+    #project-details p,
+    .contact-info p,
+    .info-text {
+        overflow-wrap: anywhere;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .menu-toggle {
         display: flex;
     }
