@@ -12,16 +12,19 @@
     height: calc(100vh - 64px);
     overflow-y: auto;
     overflow-x: hidden;
-    padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 60px);
+    padding: 16px 18px 10px;
     z-index: 20;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: var(--border-glass) transparent;
+    transform: translateY(18px);
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .section-content.active {
     display: block;
     opacity: 1;
+    transform: translateY(0);
 }
 
 .section-container {
@@ -32,14 +35,16 @@
 
 .section-header {
     text-align: center;
-    margin-bottom: clamp(28px, 4vw, 48px);
+    margin-bottom: 18px;
 }
 
 .section-header h2 {
+    font-family: var(--font-display);
     font-size: clamp(28px, 3.5vw, 42px);
     font-weight: 900;
     color: var(--text-white);
-    letter-spacing: -1px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     margin-bottom: 8px;
 }
 
@@ -49,18 +54,19 @@
 }
 
 .section-card {
-    background: var(--bg-glass-card);
+    background: rgba(0, 255, 188, 0.03);
     border: 1px solid var(--border-glass);
-    border-radius: 16px;
+    border-radius: 12px;
     padding: clamp(20px, 3vw, 32px);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: var(--transition);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .section-card:hover {
     border-color: var(--border-glass-hover);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(255, 208, 0, 0.1), inset 0 0 16px rgba(0, 255, 188, 0.04);
+    transform: translateY(-2px);
 }
 
 
@@ -98,10 +104,13 @@
 }
 
 .bio-card h2 {
+    font-family: var(--font-display);
     font-size: clamp(22px, 2.5vw, 30px);
     font-weight: 800;
     color: var(--primary);
     margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
 .bio-card p {

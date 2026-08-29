@@ -1,11 +1,3 @@
-/* =========================================
-   NAVBAR — curtain, section activation,
-   page transitions, mobile menu toggle.
-
-   Exposes initNavbar() and the helpers it
-   needs. Consumed by main.js.
-========================================= */
-
 const curtain = document.querySelector('.transition-curtain');
 
 let currentSection = 'home';
@@ -47,6 +39,17 @@ function activateSection(targetId, hooks) {
     currentSection = targetId;
 }
 
+function getCurtainVariant(targetId) {
+    const variants = {
+        home: 'scan',
+        about: 'split',
+        projects: 'vertical',
+        contact: 'scan',
+    };
+
+    return variants[targetId] || 'scan';
+}
+
 function transitionToSection(targetId, hooks) {
     if (!curtain) {
         activateSection(targetId, hooks);
@@ -54,15 +57,20 @@ function transitionToSection(targetId, hooks) {
     }
 
     return new Promise(resolve => {
-        curtain.classList.remove('wipe-out');
-        curtain.classList.add('wipe-in');
+        const variant = getCurtainVariant(targetId);
+        curtain.classList.remove('wipe-out', 'variant-scan', 'variant-split', 'variant-vertical', 'variant-diagonal');
+        curtain.classList.add('wipe-in', `variant-${variant}`);
 
         setTimeout(() => {
             activateSection(targetId, hooks);
             curtain.classList.remove('wipe-in');
             curtain.classList.add('wipe-out');
 
-            setTimeout(() => resolve(), CURTAIN_OUT);
+            setTimeout(() => {
+                curtain.classList.remove('wipe-out');
+                curtain.classList.remove('variant-scan', 'variant-split', 'variant-vertical', 'variant-diagonal');
+                resolve();
+            }, CURTAIN_OUT);
         }, CURTAIN_IN + CURTAIN_HOLD);
     });
 }

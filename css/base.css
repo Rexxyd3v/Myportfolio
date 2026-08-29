@@ -18,14 +18,14 @@
     --text-white: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.8);
     --text-dimmer: rgba(255, 255, 255, 0.55);
-    --font-headings: 'Outfit', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --font-display: 'Orbitron', sans-serif;
+    --font-headings: 'Orbitron', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
     --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
     --drive-duration: 900ms;
     --drive-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 
 * {
     margin: 0;
@@ -47,8 +47,55 @@ body {
 
 body {
     background: radial-gradient(circle at 50% 50%, var(--bg-dark) 0%, var(--bg-darker) 100%);
+    animation: backgroundPulse 16s ease-in-out infinite alternate;
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 30;
+    mix-blend-mode: screen;
+    animation: scanlines 10s linear infinite;
+}
+
+@keyframes backgroundPulse {
+    0% {
+        background: radial-gradient(circle at 50% 50%, rgba(11, 43, 32, 1) 0%, rgba(6, 28, 21, 1) 100%);
+    }
+    100% {
+        background: radial-gradient(circle at 50% 45%, rgba(18, 58, 47, 1) 0%, rgba(6, 28, 21, 1) 100%);
+    }
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 58%, rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+    z-index: 31;
+}
+
+@keyframes scanlines {
+    0% { transform: translateY(-2%); }
+    50% { transform: translateY(2%); }
+    100% { transform: translateY(-2%); }
+}
+
+@keyframes signalPulse {
+    0%, 100% { box-shadow: 0 0 0 rgba(0, 255, 188, 0.0); }
+    50% { box-shadow: 0 0 16px rgba(0, 255, 188, 0.2); }
+}
 
 .transition-curtain {
     position: fixed;
@@ -56,21 +103,95 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--bg-darker);
+    background: linear-gradient(90deg, rgba(6, 28, 21, 1) 0%, rgba(11, 43, 32, 0.98) 50%, rgba(6, 28, 21, 1) 100%);
     border-right: 3px solid var(--primary);
     z-index: 9999;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.85, 0, 0.15, 1);
+    transition: transform 0.46s cubic-bezier(0.85, 0, 0.15, 1);
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.transition-curtain::before,
+.transition-curtain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
     pointer-events: none;
 }
 
-.transition-curtain.wipe-in {
+.transition-curtain::before {
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.06),
+        rgba(255,255,255,0.06) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    opacity: 0.5;
+    animation: scanlines 8s linear infinite;
+}
+
+.transition-curtain::after {
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 208, 0, 0.14) 48%, transparent 100%);
+    opacity: 0.5;
+}
+
+.transition-curtain.variant-scan.wipe-in {
     transform: scaleX(1);
     transform-origin: left;
 }
 
-.transition-curtain.wipe-out {
+.transition-curtain.variant-scan.wipe-out {
     transform: scaleX(0);
     transform-origin: right;
+}
+
+.transition-curtain.variant-split.wipe-in {
+    transform: scaleY(1);
+    transform-origin: top;
+}
+
+.transition-curtain.variant-split.wipe-out {
+    transform: scaleY(0);
+    transform-origin: bottom;
+}
+
+.transition-curtain.variant-vertical.wipe-in {
+    transform: scaleY(1);
+    transform-origin: center;
+}
+
+.transition-curtain.variant-vertical.wipe-out {
+    transform: scaleY(0);
+    transform-origin: center;
+}
+
+.transition-curtain.variant-diagonal.wipe-in {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.transition-curtain.variant-diagonal.wipe-out {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+@keyframes sweepBeam {
+    0% { transform: translateX(-100%); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateX(110%); opacity: 0; }
+}
+
+@keyframes sweepBeam {
+    0% { transform: translateX(-100%); opacity: 0; }
+    20% { opacity: 1; }
+    55% { opacity: 0.95; }
+    100% { transform: translateX(110%); opacity: 0; }
+}
+
+@keyframes panelFlash {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
 }

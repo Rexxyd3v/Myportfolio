@@ -41,20 +41,26 @@
 }
 
 .hero-text h1 {
+    font-family: var(--font-display);
     font-size: clamp(42px, 5.2vw, 64px);
     font-weight: 900;
-    letter-spacing: -1px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     margin-bottom: 14px;
     color: var(--text-white);
+    text-shadow: 0 0 14px rgba(255, 208, 0, 0.18);
+    animation: retroGlow 2.8s ease-in-out infinite alternate;
 }
 
 .hero-text h2 {
     font-family: var(--font-mono);
     font-size: clamp(15px, 1.9vw, 21px);
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: var(--primary);
     margin-bottom: 14px;
+    animation: flicker 3.2s linear infinite;
 }
 
 .hero-text p {
@@ -84,11 +90,26 @@
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.12em;
     text-decoration: none;
     cursor: pointer;
     transition: var(--transition);
     border: none;
+}
+
+@keyframes retroGlow {
+    0% {
+        text-shadow: 0 0 8px rgba(255, 208, 0, 0.2), 0 0 16px rgba(0, 255, 188, 0.12);
+    }
+    100% {
+        text-shadow: 0 0 14px rgba(255, 208, 0, 0.35), 0 0 28px rgba(0, 255, 188, 0.18);
+    }
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 24%, 55%, 100% { opacity: 1; }
+    20%, 23% { opacity: 0.5; }
+    56% { opacity: 0.82; }
 }
 
 .hero-btn-primary {
@@ -97,21 +118,21 @@
 }
 
 .hero-btn-primary:hover {
-    background: #ffffff;
+    background: #ffdb2d;
     color: var(--bg-darker);
-    box-shadow: 0 0 20px rgba(255, 208, 0, 0.4);
+    box-shadow: 0 0 15px rgba(255, 208, 0, 0.3);
     transform: translateY(-2px);
 }
 
 .hero-btn-secondary {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(0, 255, 188, 0.06);
     color: var(--text-white);
     border: 1px solid var(--border-glass);
 }
 
 .hero-btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 255, 188, 0.12);
+    border-color: var(--border-glass-hover);
     transform: translateY(-2px);
 }
 

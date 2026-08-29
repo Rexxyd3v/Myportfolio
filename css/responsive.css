@@ -81,6 +81,18 @@
         max-height: none;
     }
 
+    #project-details {
+        grid-template-columns: 1fr;
+        min-width: 0;
+    }
+
+    .project-image-wrapper,
+    .project-gallery,
+    .project-gallery-track,
+    .project-slide {
+        min-height: 220px;
+    }
+
     #project-details h3,
     #project-details p,
     .contact-info p,
