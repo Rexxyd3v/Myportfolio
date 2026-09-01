@@ -10,7 +10,7 @@
     width: 100%;
     height: calc(100vh - 64px);
     display: grid;
-    overflow: hidden;
+    overflow: visible;
     padding: clamp(28px, 5vh, 54px) clamp(20px, 4.8vw, 62px) 0;
     z-index: 10;
 }
@@ -146,7 +146,8 @@
     grid-template-columns: minmax(0, 1fr) auto;
     column-gap: clamp(18px, 5vw, 90px);
     align-items: end;
-    min-height: 0;
+    min-height: clamp(120px, 18vh, 210px);
+    overflow: visible;
     padding-bottom: 0;
 }
 
@@ -338,7 +339,9 @@
     align-items: flex-end;
     align-self: end;
     gap: clamp(14px, 3vw, 44px);
-    padding-bottom: 0;
+    min-height: clamp(110px, 16vh, 170px);
+    padding-bottom: clamp(4px, 1vh, 12px);
+    overflow: visible;
 }
 
 .led {
@@ -346,6 +349,8 @@
     width: clamp(60px, min(9vw, 17vh), 120px);
     display: flex;
     justify-content: center;
+    align-self: flex-end;
+    min-height: clamp(90px, 12vh, 150px);
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                 opacity 0.5s ease;
 }
@@ -362,8 +367,10 @@
 .led-image {
     position: relative;
     z-index: 2;
+    display: block;
     width: 100%;
     height: auto;
+    max-height: none;
     filter: brightness(0.28) saturate(1.15) contrast(1.05);
     transition: filter 0.4s ease;
 }

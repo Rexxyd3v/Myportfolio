@@ -182,13 +182,16 @@
         flex-direction: column;
         justify-content: flex-end;
         align-items: stretch;
+        min-height: clamp(150px, 24vh, 220px);
         gap: 12px;
     }
 
     .led-group {
         flex: 0 0 auto;
         align-self: flex-end;
+        min-height: clamp(120px, 18vh, 170px);
         gap: 12px;
+        padding-bottom: 8px;
     }
 
     .robot-car {
